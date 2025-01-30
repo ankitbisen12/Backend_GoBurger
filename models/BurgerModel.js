@@ -39,6 +39,7 @@ const BurgerSchema = mongoose.Schema(
       type: String,
       enum: ["Veg", "NonVeg"],
     },
+    discountPrice: { type: Number },
     packagingCharge: {
       type: Number,
     },
