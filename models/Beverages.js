@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ColdCoffeeSchema = mongoose.Schema(
+const BeveragesSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -50,17 +50,17 @@ const ColdCoffeeSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-ColdCoffeeSchema.virtuals("id").get(function () {
+BeveragesSchema.virtuals("id").get(function () {
   return this._id;
 });
 
-ColdCoffeeSchema.virtual("discountedPrice").get(function () {
+BeveragesSchema.virtual("discountedPrice").get(function () {
   return this.discountPercentage
     ? Math.round(this.price * (1 - this.discountPercentage / 100))
     : this.price;
 });
 
-ColdCoffeeSchema.set("toJSON", {
+BeveragesSchema.set("toJSON", {
   virtuals: true,
   versionKey: false,
   transform: function (doc, ret) {
@@ -68,5 +68,5 @@ ColdCoffeeSchema.set("toJSON", {
   },
 });
 
-const ColdCoffee = mongoose.model("ColdCoffee", ColdCoffeeSchema);
-module.exports = ColdCoffee;
+const Beverages = mongoose.model("Beverages", BeveragesSchema);
+module.exports = Beverages;

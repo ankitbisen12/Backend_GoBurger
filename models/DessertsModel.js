@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MealSchema = mongoose.Schema(
+const DessertsSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -24,6 +24,7 @@ const MealSchema = mongoose.Schema(
       type: Number,
       min: [0, "Wrong min discount"],
       max: [100, "Wrong max discount"],
+      default: 5, // Default discount is 5% if not provided
     },
     rating: {
       type: mongoose.Schema.Types.Decimal128,
@@ -34,13 +35,6 @@ const MealSchema = mongoose.Schema(
       type: [String],
       required: true,
     },
-    foodlabel: {
-      type: String,
-      enum: ["Veg", "NonVeg"],
-    },
-    packagingCharge: {
-      type: Number,
-    },
     deleted: {
       type: Boolean,
       default: false,
@@ -49,23 +43,15 @@ const MealSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-MealSchema.virtual("id").get(function () {
+DessertsSchema.virtual("id").get(function () {
   return this._id;
 });
 
-MealSchema.virtual("discountedPrice").get(function () {
+DessertsSchema.virtual("discountedPrice").get(function () {
   return this.discountPercentage
     ? Math.round(this.price * (1 - this.discountPercentage / 100))
     : this.price;
 });
 
-MealSchema.set("toJSON", {
-  virtuals: true,
-  versionKey: false,
-  transform: function (doc, ret) {
-    delete ret._id;
-  },
-});
-
-const Meal = mongoose.model("Meal", MealSchema);
-module.exports = Meal;
+const Desserts = mongoose.model("Desserts", DessertsSchema);
+module.exports = Desserts;

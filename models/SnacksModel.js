@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const IceCreamSchema = mongoose.Schema(
+const SnacksSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -43,15 +43,23 @@ const IceCreamSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-IceCreamSchema.virtual("id").get(function () {
+SnacksSchema.virtual("id").get(function () {
   return this._id;
 });
 
-IceCreamSchema.virtual("discountedPrice").get(function () {
+SnacksSchema.virtual("discountPrice").get(function () {
   return this.discountPercentage
     ? Math.round(this.price * (1 - this.discountPercentage / 100))
     : this.price;
 });
 
-const IceCream = mongoose.model("IceCream", IceCreamSchema);
-module.exports = IceCream;
+SnacksSchema.set("toJSON", {
+  virtuals: true,
+  versionkey: false,
+  transform: function (doc, ret) {
+    delete ret._id;
+  },
+});
+
+const Snacks = mongoose.model("Snacks", SnacksSchema);
+module.exports = Snacks;

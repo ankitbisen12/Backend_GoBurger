@@ -41,10 +41,6 @@ const BurgerMealSchema = mongoose.Schema(
       type: String,
       enum: ["Veg", "NonVeg"],
     },
-    ingredients: {
-      type: [String],
-      required: true,
-    },
     packagingCharge: {
       type: Number,
     },
