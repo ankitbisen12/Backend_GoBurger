@@ -6,10 +6,9 @@ const MenuSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  images: {
-    type: [String],
-    required: true,
-  },
+  image: {
+    type: String,
+  }, // store base64 encoded data
   deleted: {
     type: Boolean,
     default: false,

@@ -2,7 +2,8 @@ const Burger = require("../models/BurgerModel");
 const catchAsync = require("../utils/catchAsync");
 
 exports.createBurger = catchAsync(async (req, res, next) => {
-  const newBurger = await Burger.create(req.body);
+  const photoBase = req.file ? req.file.buffer.toString("base64") : null;
+  const newBurger = await Burger.create({ ...req.body, image: photoBase });
 
   res.status(201).json({
     status: "Success",

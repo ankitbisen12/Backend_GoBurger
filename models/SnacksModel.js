@@ -6,7 +6,7 @@ const SnacksSchema = mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      maxLength: [20, "Name is too long"],
+      maxLength: [30, "Name is too long"],
     },
     category: {
       type: String,
@@ -26,15 +26,18 @@ const SnacksSchema = mongoose.Schema(
       max: [100, "Wrong max discount"],
       default: 5, // Default discount is 5% if not provided
     },
+    foodlabel: {
+      type: String,
+      enum: ["Veg", "NonVeg"],
+    },
     rating: {
       type: mongoose.Schema.Types.Decimal128,
       min: [0, "Wrong min rating"],
       max: [5, "Wrong max rating"],
     },
-    images: {
-      type: [String],
-      required: true,
-    },
+    image: {
+      type: String,
+    }, // store base64 encoded data
     deleted: {
       type: Boolean,
       default: false,

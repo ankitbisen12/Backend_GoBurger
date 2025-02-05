@@ -10,7 +10,7 @@ const AddonSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["addon", "veggies", "chesse", "sauces"],
+      enum: ["addon", "veggies", "chesse", "sauces", "drinks"],
       required: true,
     },
     price: {
@@ -23,13 +23,9 @@ const AddonSchema = mongoose.Schema(
       max: [100, "Wrong max discount"],
       default: 5, // Default discount is 5% if not provided
     },
-    images: {
-      type: [String],
-      required: true,
-    },
-    discountPrice: {
-      type: Number,
-    },
+    image: {
+      type: String,
+    }, // store base64 encoded data
     deleted: {
       type: Boolean,
       default: false,

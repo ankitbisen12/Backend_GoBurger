@@ -1,12 +1,12 @@
-const express = require("mongoose");
+const express = require("express");
 const burgerController = require("../controller/burgerController");
-
 const router = express.Router();
+const upload = require("../utils/multerStorage");
 
 router
   .route("/")
   .get(burgerController.fetchBurger)
-  .post(burgerController.createBurger);
+  .post(upload.single("image"), burgerController.createBurger);
 
 router
   .route("/:id")

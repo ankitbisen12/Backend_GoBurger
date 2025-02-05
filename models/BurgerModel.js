@@ -31,10 +31,9 @@ const BurgerSchema = mongoose.Schema(
       min: [0, "Wrong min rating"],
       max: [5, "Wrong max rating"],
     },
-    images: {
-      type: [String],
-      required: true,
-    },
+    image: {
+      type: String,
+    }, // store base64 encoded data
     foodlabel: {
       type: String,
       enum: ["Veg", "NonVeg"],

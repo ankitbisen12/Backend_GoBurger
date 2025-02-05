@@ -30,9 +30,12 @@ const MealSchema = mongoose.Schema(
       min: [0, "Wrong min rating"],
       max: [5, "Wrong max rating"],
     },
-    images: {
-      type: [String],
-      required: true,
+    foodlabel: {
+      type: String,
+      enum: ["Veg", "NonVeg"],
+    },
+    image: {
+      type: String,
     },
     foodlabel: {
       type: String,

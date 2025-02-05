@@ -20,6 +20,10 @@ const DessertsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    foodlabel: {
+      type: String,
+      enum: ["Veg", "NonVeg"],
+    },
     discountPercentage: {
       type: Number,
       min: [0, "Wrong min discount"],
@@ -31,10 +35,9 @@ const DessertsSchema = mongoose.Schema(
       min: [0, "Wrong min rating"],
       max: [5, "Wrong max rating"],
     },
-    images: {
-      type: [String],
-      required: true,
-    },
+    image: {
+      type: String,
+    }, // store base64 encoded data
     deleted: {
       type: Boolean,
       default: false,
