@@ -6,7 +6,7 @@ const BurgerMealSchema = mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      maxLength: [20, "Name is too long"],
+      maxLength: [100, "Name is too long"],
     },
     category: {
       type: String,
@@ -60,6 +60,12 @@ const BurgerMealSchema = mongoose.Schema(
       },
     ],
     sauces: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Addon",
+      },
+    ],
+    drinks: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Addon",

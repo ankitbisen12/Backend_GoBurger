@@ -38,10 +38,6 @@ const BeveragesSchema = mongoose.Schema(
     image: {
       type: String,
     }, // store base64 encoded data
-    ingredients: {
-      type: [String],
-      required: true,
-    },
     packagingCharge: {
       type: Number,
     },

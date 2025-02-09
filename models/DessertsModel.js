@@ -6,7 +6,7 @@ const DessertsSchema = mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      maxLength: [20, "Name is too long"],
+      maxLength: [40, "Name is too long"],
     },
     category: {
       type: String,

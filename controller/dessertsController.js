@@ -1,7 +1,7 @@
 const Desserts = require("../models/DessertsModel");
 const catchAsync = require("../utils/catchAsync");
 
-exports.fetchDesserts = catchAsync(async (req, resizeBy, next) => {
+exports.fetchDesserts = catchAsync(async (req, res, next) => {
   const desserts = await Desserts.find({});
 
   res.status(200).json({

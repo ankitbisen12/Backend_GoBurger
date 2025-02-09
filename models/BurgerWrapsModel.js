@@ -11,6 +11,10 @@ const BurgerWrapsSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
@@ -35,14 +39,12 @@ const BurgerWrapsSchema = mongoose.Schema({
   packagingCharge: {
     type: Number,
   },
-  addons: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Addon",
-      },
-    ],
-  },
+  drinks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Addon",
+    },
+  ],
   deleted: {
     type: Boolean,
     default: false,
