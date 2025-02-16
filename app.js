@@ -19,6 +19,7 @@ const burgerMealRouter = require("./routes/burgerMealRoutes");
 const addonRouter = require("./routes/addonRoutes");
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
+const cartRouter = require("./routes/cartRoutes");
 const { isAuth, sanitizeUser, tokenExtractor } = require("./utils/common");
 const User = require("./models/UserModel");
 const dotenv = require("dotenv");
@@ -40,7 +41,14 @@ app.use(
   })
 );
 app.use(passport.authenticate("session"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allow all origins for testing
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 
 //cutsom routes
 app.use("/api/v1/menu", menuRouter);
@@ -54,6 +62,7 @@ app.use("/api/v1/burgerMeal", burgerMealRouter);
 app.use("/api/v1/addons", addonRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/cart", isAuth(),cartRouter);
 
 passport.use(
   "local",

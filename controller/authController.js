@@ -33,6 +33,7 @@ exports.creatUser = catchAsync(async (req, res, next) => {
 });
 
 exports.loginUser = catchAsync(async (req, res, next) => {
+  console.log("Request reached");
   const user = req.user;
 
   const token = jwt.sign(sanitizeUser(user), process.env.JWT_SECRET_KEY, {
@@ -47,24 +48,27 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 
 //logic for checking user is already logged in when app refreshed or closed for some time.
 exports.checkAuth = catchAsync(async (req, res, next) => {
-  if (!req.headers.authorization || !req.headers.authorization.startsWith("Bearer")) {
+  if (
+    !req.headers.authorization ||
+    !req.headers.authorization.startsWith("Bearer")
+  ) {
     return res.sendStatus(401); //Unauthorized if token is missing
   }
 
   const token = req.headers.authorization.split(" ")[1];
   // console.log("Token inside authController", token);
 
-  try{
+  try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await User.findById(decoded.id).select("-password -salt");
 
-    if(!user){
+    if (!user) {
       res.sendStatus(401);
-    }else{
+      console.log("User not found");
+    } else {
       res.status(200).json(sanitizeUser(user));
     }
-  }
-  catch(error){
+  } catch (error) {
     res.sendStatus(401);
   }
 });
