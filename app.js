@@ -20,6 +20,7 @@ const addonRouter = require("./routes/addonRoutes");
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
 const cartRouter = require("./routes/cartRoutes");
+const orderRouter = require("./routes/orderRoutes");
 const { isAuth, sanitizeUser, tokenExtractor } = require("./utils/common");
 const User = require("./models/UserModel");
 const dotenv = require("dotenv");
@@ -56,13 +57,14 @@ app.use("/api/v1/desserts", dessertRouter);
 app.use("/api/v1/snacks", snacksRouter);
 app.use("/api/v1/burgers", burgerRouter);
 app.use("/api/v1/burgerWraps", burgerWrapsRouter);
-app.use("/api/v1/beverages", beveragesRouter);
+app.use("/api/v1/beverages", beveragesRouter);1
 app.use("/api/v1/meal", mealRouter);
 app.use("/api/v1/burgerMeal", burgerMealRouter);
 app.use("/api/v1/addons", addonRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/cart", isAuth(),cartRouter);
+app.use("/api/v1/cart",isAuth(), cartRouter);
+app.use("/api/v1/orders", isAuth(), orderRouter);
 
 passport.use(
   "local",
@@ -73,7 +75,7 @@ passport.use(
   ) {
     try {
       const user = await User.findOne({ email: email });
-      console.log("User", user);
+      console.log("User inside local", user);
 
       if (!user) {
         done(null, false, { message: "Invalid Credentials" });

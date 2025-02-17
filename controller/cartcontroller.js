@@ -3,6 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.fetchCartByUser = catchAsync(async (req, res, next) => {
   const { id } = req.user;
+  console.log("id",id);
 
   const cartItems = await Cart.find({ user: id }).populate("items");
   res.status(200).json(cartItems);

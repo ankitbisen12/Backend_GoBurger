@@ -1,7 +1,36 @@
 const passport = require("passport");
 
-exports.isAuth = (user) => {
-  return passport.authenticate("jwt");
+// exports.isAuth = () => (req, res, next) => {
+//   const token = req.headers.authorization?.split(" ")[1]; // Extract token
+//   console.log("Extracted Token:", token); // Debugging line
+
+//   if (!token) {
+//     return res.status(401).json({ message: "Unauthorized - No Token" });
+//   }
+
+//   try {
+//     cosnsole.log("Reached here");
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+//     req.user = decoded; // Attach user to request
+//     next();
+//   } catch (err) {
+//     return res.status(401).json({ message: "Unauthorized - Invalid Token" });
+//   }
+// };
+
+exports.isAuth = () => (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ message: "Internal server error", error: err });
+    }
+
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized - Invalid token" });
+    }
+
+    req.user = user; // Attach the authenticated user to req.user
+    next(); // Proceed to the next middleware
+  })(req, res, next);
 };
 
 exports.sanitizeUser = (user) => {

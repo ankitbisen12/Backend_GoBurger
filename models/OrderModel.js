@@ -11,7 +11,7 @@ const OrderSchema = mongoose.Schema(
     totalAmount: { type: Number },
     totalItems: { type: Number },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    paymentMethod: { type: String, required: true, ref: paymentMethods },
+    paymentMethod: { type: String, required: true, enum: ["cash", "card"] },
     paymentStatus: { type: String, required: true, default: "Pending" },
     status: { type: String, default: "Pending", required: true },
     selectedAddress: { type: mongoose.Schema.Types.Mixed, required: true },
