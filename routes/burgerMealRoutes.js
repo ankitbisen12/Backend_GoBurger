@@ -1,8 +1,8 @@
 const express = require("express");
 const burgerMealController = require("../controller/burgerMealController");
-const router = express.Router();
 const upload = require("../utils/multerStorage");
 
+const router = express.Router();
 router
   .route("/")
   .get(burgerMealController.fetchBurgerMeal)

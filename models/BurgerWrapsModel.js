@@ -39,6 +39,30 @@ const BurgerWrapsSchema = mongoose.Schema({
   packagingCharge: {
     type: Number,
   },
+  addons: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Addon",
+    },
+  ],
+  veggies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Addon",
+    },
+  ],
+  chesse: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Addon",
+    },
+  ],
+  sauces: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Addon",
+    },
+  ],
   drinks: [
     {
       type: mongoose.Schema.Types.ObjectId,

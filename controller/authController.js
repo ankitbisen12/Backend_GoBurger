@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 exports.creatUser = catchAsync(async (req, res, next) => {
   const salt = crypto.randomBytes(16);
+  const photoBase = req.file ? req.file.buffer.toString("base64") : null;
 
   crypto.pbkdf2(
     req.body.password,
@@ -16,6 +17,7 @@ exports.creatUser = catchAsync(async (req, res, next) => {
     async function (err, hashedPassword) {
       const newUser = await User.create({
         ...req.body,
+        avatar: photoBase,
         password: hashedPassword,
         salt,
       });

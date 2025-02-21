@@ -1,7 +1,7 @@
 const Order = require("../models/OrderModel");
 const catchAsync = require("../utils/catchAsync");
 
-exports.fetchOrderByUser = catchAsync(async (req, res, next) => {
+exports.fetchOrderByUserId = catchAsync(async (req, res, next) => {
   const { id } = req.user;
 
   const orders = await Order.find({ user: id });

@@ -1,8 +1,8 @@
 const express = require("express");
 const MenuController = require("../controller/menuController");
-const router = express.Router();
 const upload = require("../utils/multerStorage");
 
+const router = express.Router();
 router
   .route("/")
   .get(MenuController.fetchMenu)

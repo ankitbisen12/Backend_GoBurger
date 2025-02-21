@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+//-------------library imports
 const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
@@ -8,25 +9,13 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
-const menuRouter = require("./routes/menuRoutes");
-const dessertRouter = require("./routes/dessertsRoutes");
-const snacksRouter = require("./routes/snacksRoutes");
-const burgerRouter = require("./routes/burgerRoutes");
-const burgerWrapsRouter = require("./routes/burgerWrapsRoutes");
-const beveragesRouter = require("./routes/beveragesRoutes");
-const mealRouter = require("./routes/mealRoutes");
-const burgerMealRouter = require("./routes/burgerMealRoutes");
-const addonRouter = require("./routes/addonRoutes");
-const authRouter = require("./routes/authRoutes");
-const userRouter = require("./routes/userRoutes");
-const cartRouter = require("./routes/cartRoutes");
-const orderRouter = require("./routes/orderRoutes");
+const dotenv = require("dotenv");
+//-------------router imports
+const routes = require("./utils/routerVar");
+//-------------other imports
 const { isAuth, sanitizeUser, tokenExtractor } = require("./utils/common");
 const User = require("./models/UserModel");
-const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
-
-// console.log("JWT_SECRET_KEY", process.env.JWT_SECRET_KEY);
 
 const opts = {};
 opts.jwtFromRequest = tokenExtractor;
@@ -52,19 +41,19 @@ app.use(
 );
 
 //cutsom routes
-app.use("/api/v1/menu", menuRouter);
-app.use("/api/v1/desserts", dessertRouter);
-app.use("/api/v1/snacks", snacksRouter);
-app.use("/api/v1/burgers", burgerRouter);
-app.use("/api/v1/burgerWraps", burgerWrapsRouter);
-app.use("/api/v1/beverages", beveragesRouter);1
-app.use("/api/v1/meal", mealRouter);
-app.use("/api/v1/burgerMeal", burgerMealRouter);
-app.use("/api/v1/addons", addonRouter);
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/users", userRouter);
-app.use("/api/v1/cart",isAuth(), cartRouter);
-app.use("/api/v1/orders", isAuth(), orderRouter);
+app.use("/api/v1/menu", routes.menuRouter);
+app.use("/api/v1/desserts", routes.dessertRouter);
+app.use("/api/v1/snacks", routes.snacksRouter);
+app.use("/api/v1/burgers", routes.burgerRouter);
+app.use("/api/v1/burgerWraps", routes.burgerWrapsRouter);
+app.use("/api/v1/beverages", routes.beveragesRouter);
+app.use("/api/v1/meal", routes.mealRouter);
+app.use("/api/v1/burgerMeal", routes.burgerMealRouter);
+app.use("/api/v1/addons", routes.addonRouter);
+app.use("/api/v1/auth", routes.authRouter);
+app.use("/api/v1/users", isAuth(), routes.userRouter);
+app.use("/api/v1/cart", isAuth(), routes.cartRouter);
+app.use("/api/v1/orders", isAuth(), routes.orderRouter);
 
 passport.use(
   "local",
