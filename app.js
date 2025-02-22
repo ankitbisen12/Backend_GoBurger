@@ -51,7 +51,7 @@ app.use("/api/v1/meal", routes.mealRouter);
 app.use("/api/v1/burgerMeal", routes.burgerMealRouter);
 app.use("/api/v1/addons", routes.addonRouter);
 app.use("/api/v1/auth", routes.authRouter);
-app.use("/api/v1/users", isAuth(), routes.userRouter);
+app.use("/api/v1/users", routes.userRouter);
 app.use("/api/v1/cart", isAuth(), routes.cartRouter);
 app.use("/api/v1/orders", isAuth(), routes.orderRouter);
 
@@ -64,7 +64,7 @@ passport.use(
   ) {
     try {
       const user = await User.findOne({ email: email });
-      console.log("User inside local", user);
+      // console.log("User inside local", user);
 
       if (!user) {
         done(null, false, { message: "Invalid Credentials" });

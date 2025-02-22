@@ -1,12 +1,12 @@
 const Meal = require("../models/MealModel");
 const catchAsync = require("../utils/catchAsync");
 
-exports.fetchMeal = catchAsync(async (req, resizeBy, next) => {
-  const meal = await Meal.find({});
+exports.fetchMeal = catchAsync(async (req, res, next) => {
+  const meals = await Meal.find({});
 
   res.status(200).json({
     status: "Success",
-    meal,
+    meals,
   });
 });
 

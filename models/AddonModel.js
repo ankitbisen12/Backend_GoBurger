@@ -17,6 +17,10 @@ const AddonSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    foodlabel: {
+      type: String,
+      enum: ["Veg", "NonVeg"],
+    },
     discountPercentage: {
       type: Number,
       min: [0, "Wrong min discount"],
