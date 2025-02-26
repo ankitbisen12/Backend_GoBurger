@@ -1,6 +1,6 @@
 const User = require("../models/UserModel");
 const catchAsync = require("../utils/catchAsync");
-const {userInfo }= require("../utils/common");
+const { userInfo } = require("../utils/common");
 
 exports.fetchUserById = catchAsync(async (req, res, next) => {
   const { id } = req.user;

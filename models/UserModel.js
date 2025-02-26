@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
   name: { type: String },
   email: { type: String, unique: true },
-  password: { type: Buffer},
+  password: { type: Buffer },
   avatar: {
     type: String,
   },
@@ -11,7 +11,7 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: "User",
   },
-  addresses: { type: [mongoose.Schema.Types.Mixed], default: [] }, //TODO: we can create separate schema for this.
+  addresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Address" }], // Reference to Address model
   salt: Buffer,
   mobileNo: { type: Number },
 });

@@ -12,6 +12,7 @@ exports.userRouter = require("../routes/userRoutes");
 exports.cartRouter = require("../routes/cartRoutes");
 exports.orderRouter = require("../routes/orderRoutes");
 exports.faqSupportRouter = require("../routes/FaqSupportRoutes");
+exports.addressRouter = require("../routes/addressRoutes");
 
 
 

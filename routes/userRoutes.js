@@ -4,6 +4,6 @@ const userController = require("../controller/userController");
 
 const router = express.Router();
 router.route("/own").get(userController.fetchUserById);
-router.route("/:id").post(userController.updateUser);
+router.route("/:id").patch(userController.updateUser);
 
 module.exports = router;

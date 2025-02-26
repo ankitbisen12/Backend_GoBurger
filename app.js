@@ -55,6 +55,7 @@ app.use("/api/v1/users", routes.userRouter);
 app.use("/api/v1/cart", isAuth(), routes.cartRouter);
 app.use("/api/v1/orders", isAuth(), routes.orderRouter);
 app.use("/api/v1/faq", routes.faqSupportRouter);
+app.use("/api/v1/address", routes.addressRouter);
 
 passport.use(
   "local",
